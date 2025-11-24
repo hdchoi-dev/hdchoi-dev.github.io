@@ -250,7 +250,7 @@
   cursor: default;
 
   &.is--visible {
-    display: block;
+    display: flex;
   }
 
   @include breakpoint($large) {

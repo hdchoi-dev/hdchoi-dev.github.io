@@ -15,6 +15,7 @@ body {
   padding: 0;
   color: $text-color;
   font-family: $global-font-family;
+  // font-size: $type-size-6;
   line-height: 1.5;
 
   &.overflow--hidden {
@@ -66,7 +67,7 @@ small,
 }
 
 p {
-  margin-bottom: 1.3em;
+  margin-bottom: 1em;
 }
 
 u,
@@ -109,7 +110,7 @@ abbr[data-original-title] {
 /* blockquotes */
 
 blockquote {
-  margin-block: 2em;
+  margin-block: 1em;
   margin-inline-end: 1em;
   padding-inline: 1em;
   font-style: italic;

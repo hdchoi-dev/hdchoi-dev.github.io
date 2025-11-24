@@ -7,3 +7,32 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+@media (min-width: 64em){
+    .author__urls.social-icons {
+    display: flex;
+    flex-wrap: nowrap;      
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+    .author__urls.social-icons li {
+    margin: 0;
+    }
+    .author__urls.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    }
+}
+
+
+
+/* Category tree (sidebar) */
+.cat-tree { list-style: none; margin: 0; padding-left: 0; }
+.cat-tree .cat-node > a { display: block; padding: 2px 0; color: inherit; text-decoration: none; }
+.cat-tree .cat-node > a:hover { text-decoration: underline; }
+.cat-tree .count { color: #888; font-size: 0.85em; margin-left: 4px; }
+.cat-tree.cat-depth-2 { margin-left: 0.75rem; }
+.cat-tree.cat-depth-3 { margin-left: 1.25rem; }
+.sidebar__categories { margin-top: 1rem; }
+.sidebar__categories h3 { margin: 0 0 0.25rem 0; font-size: 1rem; }

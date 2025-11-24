@@ -1,0 +1,97 @@
+{% assign delimiter = include.delimiter | default: '|' %}
+{% assign base_path = include.base_path | default: site.category_archive.path | default: '/categories/' %}
+{% assign show_count = include.show_count | default: true %}
+
+{%- comment -%}
+  Build flat list of category keys (e.g., "A|B|C") from site.categories
+{%- endcomment -%}
+{% assign keys_join = '' %}
+{% for pair in site.categories %}
+  {% assign k = pair[0] %}
+  {% unless keys_join contains k | append: '||' %}
+    {% assign keys_join = keys_join | append: k | append: '||' %}
+  {% endunless %}
+{% endfor %}
+{% assign keys = keys_join | split: '||' | uniq | sort_natural %}
+
+{%- comment -%}
+  Collect root-level names (first segment before delimiter)
+{%- endcomment -%}
+{% assign roots_join = '' %}
+{% for k in keys %}
+  {% assign p = k | split: delimiter %}
+  {% assign root = p[0] %}
+  {% unless roots_join contains root | append: '||' %}
+    {% assign roots_join = roots_join | append: root | append: '||' %}
+  {% endunless %}
+{% endfor %}
+{% assign roots = roots_join | split: '||' | uniq | sort_natural %}
+
+<ul class="cat-tree cat-depth-1">
+{% for r in roots %}
+  {% assign r_key = r %}
+  {% assign r_count = site.categories[r_key].size | default: 0 %}
+  <li class="cat-node">
+    <a href="{{ base_path | relative_url }}#{{ r_key | slugify }}">
+      {{ r }}{% if show_count and r_count %} <span class="count">{{ r_count }}</span>{% endif %}
+    </a>
+
+    {%- comment -%} Collect level-2 children under r {%- endcomment -%}
+    {% assign lvl2_join = '' %}
+    {% for k in keys %}
+      {% assign p = k | split: delimiter %}
+      {% if p.size > 1 and p[0] == r %}
+        {% assign c_key = p[0] | append: delimiter | append: p[1] %}
+        {% unless lvl2_join contains c_key | append: '||' %}
+          {% assign lvl2_join = lvl2_join | append: c_key | append: '||' %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+    {% assign lvl2 = lvl2_join | split: '||' | uniq | sort_natural %}
+
+    {% if lvl2.size > 0 %}
+    <ul class="cat-tree cat-depth-2">
+      {% for c in lvl2 %}
+        {% assign c_label = c | split: delimiter | last %}
+        {% assign c_count = site.categories[c].size | default: 0 %}
+        <li class="cat-node">
+          <a href="{{ base_path | relative_url }}#{{ c | slugify }}">
+            {{ c_label }}{% if show_count and c_count %} <span class="count">{{ c_count }}</span>{% endif %}
+          </a>
+
+          {%- comment -%} Collect level-3 children under c {%- endcomment -%}
+          {% assign lvl3_join = '' %}
+          {% assign c_parts = c | split: delimiter %}
+          {% assign c_root = c_parts[0] %}
+          {% assign c_second = c_parts[1] %}
+          {% for k in keys %}
+            {% assign p = k | split: delimiter %}
+            {% if p.size > 2 and p[0] == c_root and p[1] == c_second %}
+              {% assign g_key = p[0] | append: delimiter | append: p[1] | append: delimiter | append: p[2] %}
+              {% unless lvl3_join contains g_key | append: '||' %}
+                {% assign lvl3_join = lvl3_join | append: g_key | append: '||' %}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+          {% assign lvl3 = lvl3_join | split: '||' | uniq | sort_natural %}
+
+          {% if lvl3.size > 0 %}
+          <ul class="cat-tree cat-depth-3">
+            {% for g in lvl3 %}
+              {% assign g_label = g | split: delimiter | last %}
+              {% assign g_count = site.categories[g].size | default: 0 %}
+              <li class="cat-node">
+                <a href="{{ base_path | relative_url }}#{{ g | slugify }}">
+                  {{ g_label }}{% if show_count and g_count %} <span class="count">{{ g_count }}</span>{% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
