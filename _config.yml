@@ -34,7 +34,7 @@ enable_copy_code_button  : # true, false (default)
 copyright                : # "copyright" name, defaults to site.title
 copyright_url            : # "copyright" URL, defaults to site.url
 comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
+  provider               : "utterances" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
   disqus:
     shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -312,14 +312,15 @@ compress_html:
 defaults:
   # _posts
   - scope:
-      path: ""
+      path: ""      
       type: posts
     values:
       layout: single
       author_profile: true
       read_time: false
       show_date: true
-      comments: # true
-      share: true
+      comments: true
+      share: false
       related: true
-
+      toc: true
+      toc_sticky: true

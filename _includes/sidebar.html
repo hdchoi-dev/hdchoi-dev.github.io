@@ -1,7 +1,7 @@
   <div class="sidebar sticky">
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
       <div class="sidebar__categories">
-        <h3>Categories</h3>
+        <div style="font-size: 0.8em;">Categories</div>
         {% include category-tree.html delimiter="/" base_path=site.category_archive.path show_count=true %}
       </div>
   {% if page.sidebar %}
