@@ -10,7 +10,7 @@ tags:
 ---
 
 ## summary
-개발할 때 자주 쓰는 터미널 명령어 정리
+개발할 때 자주 쓰는 터미널 명령어 모음
 
 
 # Terminal Command
