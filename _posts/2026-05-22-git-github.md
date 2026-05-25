@@ -8,6 +8,10 @@ tags:
   - command
 ---
 
+## summary
+자주 쓰는 git 명령어 모음
+
+
 # Git
 ## 로컬 프로젝트 GitHub 원격 저장소 연동
 
@@ -25,7 +29,9 @@ git push
 
 ## 원격 레포 최신 변경 pull
 
+```bash
 git pull origin main
+```
 
 ## 브랜치
 
