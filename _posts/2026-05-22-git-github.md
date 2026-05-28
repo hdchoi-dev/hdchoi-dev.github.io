@@ -1,14 +1,14 @@
 ---
 title: "Git/GitHub"
 categories:
-  - Cheatsheet
+  - tools/git
 tags:
+  - cheatsheet
   - git
   - github
   - command
 ---
 
-## summary
 자주 쓰는 git 명령어 모음
 
 

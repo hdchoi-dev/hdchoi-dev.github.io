@@ -1,15 +1,15 @@
 ---
 title: "Terminal Command"
 categories:
-  - Cheatsheet
+  - tools/terminal
 tags:
+  - cheatsheet
   - terminal
   - command
   - windows
   - path
 ---
 
-## summary
 개발할 때 자주 쓰는 터미널 명령어 모음
 
 
